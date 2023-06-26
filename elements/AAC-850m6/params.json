@@ -1,0 +1,113 @@
+{
+    "add_is_visible": true,
+    "category": "visual elements",
+    "default_dim": {
+        "height": 40,
+        "width": 40
+    },
+    "display": "Intégration Tezos",
+    "fields": {
+        "AAN": {
+            "caption": "RCP - Mainnet",
+            "default_val": "mainnet.tezos.marigold.dev",
+            "editor": "DynamicValue",
+            "name": "rpcUrlMainnet",
+            "rank": 0,
+            "value": "text"
+        },
+        "AAO": {
+            "caption": "RCP - Sandbox",
+            "default_val": "ghostnet.tezos.marigold.dev",
+            "editor": "DynamicValue",
+            "name": "rpcUrlSandboxNetwork",
+            "rank": 1,
+            "value": "text"
+        }
+    },
+    "icon": "ion-social-euro",
+    "property_applications": {
+        "resizable": true
+    },
+    "states": {
+        "AAP": {
+            "caption": "Error's message",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "errorMessage",
+            "value": "text"
+        },
+        "AAQ": {
+            "caption": "Wallet's address",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "userAddress",
+            "value": "text"
+        },
+        "AAR": {
+            "caption": "Transfer's address_target",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "transferAddressTarget",
+            "value": "text"
+        },
+        "AAS": {
+            "caption": "Transfer's address_sender",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "transferAddressSender",
+            "value": "text"
+        },
+        "AAT": {
+            "caption": "Transfer's amount",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "transferAmount",
+            "value": "number"
+        },
+        "AAU": {
+            "caption": "Transfer's status",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "transferStatus",
+            "value": "text"
+        },
+        "AAV": {
+            "caption": "Transfer's id",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "transferId",
+            "value": "text"
+        },
+        "AAW": {
+            "caption": "Transfer's Error's message",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "transferErrorMessage",
+            "value": "text"
+        },
+        "AAX": {
+            "caption": "Transfer's URL",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "transferURL",
+            "value": "text"
+        },
+        "AAY": {
+            "caption": "Transfer's URL API",
+            "initialization_code": {
+                "fn": "function(properties, context) {\n\n\n\n}"
+            },
+            "name": "transferURLAPI",
+            "value": "text"
+        }
+    }
+}

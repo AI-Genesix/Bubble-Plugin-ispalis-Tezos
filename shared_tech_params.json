@@ -1,0 +1,24 @@
+{
+    "assets": {
+        "AAK": {
+            "name": "taquito.min.js",
+            "url": "//meta-l.cdn.bubble.io/f1687506401200x140275660008050600/taquito.min.js"
+        },
+        "AAL": {
+            "name": "taquito-beacon-wallet.umd.js",
+            "url": "//meta-l.cdn.bubble.io/f1687506430948x932559954189046400/taquito-beacon-wallet.umd.js"
+        },
+        "AAM": {
+            "name": "taquito-beacon-wallet.umd.js.map",
+            "url": "//meta-l.cdn.bubble.io/f1687506473108x904512152619214100/taquito-beacon-wallet.umd.js.map"
+        },
+        "AAf": {
+            "name": "ispalis.svg",
+            "url": "//meta-l.cdn.bubble.io/f1687726066188x999913872204210700/ispalis.svg"
+        }
+    },
+    "dependencies": {
+        "plugin_api_version": 3,
+        "use_jquery": true
+    }
+}

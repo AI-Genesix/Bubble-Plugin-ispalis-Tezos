@@ -1,0 +1,30 @@
+{
+    "caption": "Connect to",
+    "fields": {
+        "AAc": {
+            "caption": "App Name",
+            "default_val": "Bubble App",
+            "editor": "DynamicValue",
+            "name": "appName",
+            "rank": 0,
+            "value": "text"
+        },
+        "AAd": {
+            "caption": "Wallet Network",
+            "editor": "Dropdown",
+            "name": "walletNetwork",
+            "optional": true,
+            "options": "mainnet,ghostnet",
+            "rank": 1
+        },
+        "AAe": {
+            "caption": "Wallet Network (Dynamic)",
+            "doc": "Dynamic expression.",
+            "editor": "DynamicValue",
+            "name": "walletNetworkDynamic",
+            "optional": true,
+            "rank": 2,
+            "value": "text"
+        }
+    }
+}
