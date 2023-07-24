@@ -1,0 +1,19 @@
+{
+    "caption": "Make a Transfer using",
+    "fields": {
+        "AAo": {
+            "caption": "Address",
+            "editor": "DynamicValue",
+            "name": "address",
+            "rank": 0,
+            "value": "text"
+        },
+        "AAp": {
+            "caption": "Amount",
+            "editor": "DynamicValue",
+            "name": "amount",
+            "rank": 1,
+            "value": "number"
+        }
+    }
+}

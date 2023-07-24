@@ -8,16 +8,16 @@
     "display": "Intégration Tezos",
     "fields": {
         "AAN": {
-            "caption": "RCP - Mainnet",
-            "default_val": "mainnet.tezos.marigold.dev",
+            "caption": "RPC | Mainnet",
+            "default_val": "mainnet.api.tez.ie",
             "editor": "DynamicValue",
             "name": "rpcUrlMainnet",
             "rank": 0,
             "value": "text"
         },
         "AAO": {
-            "caption": "RCP - Sandbox",
-            "default_val": "ghostnet.tezos.marigold.dev",
+            "caption": "RPC | Sandbox",
+            "default_val": "hangzhounet.api.tez.ie",
             "editor": "DynamicValue",
             "name": "rpcUrlSandboxNetwork",
             "rank": 1,

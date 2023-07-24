@@ -148,7 +148,7 @@ function(instance, context) {
                 id: 'mainnet'
             },
             sandbox: {
-                id: 'ghostnet'
+                id: 'hangzhounet'
             }
         },
         tzExplorerAPI: {
@@ -165,30 +165,125 @@ function(instance, context) {
             tzExplorer: {
                 mainnet: {
                     browser: 'https://tzkt.io/',
-                    api: 'https://api.tzkt.io/',
+                    api: 'https://api.tzkt.io/v1/',
                 },
-                ghostnet: {
-                    browser: 'https://ghostnet.tzkt.io/',
-                    api: 'https://api.ghostnet.tzkt.io/',
+                hangzhounet: {
+                    browser: 'https://hangzhounet.tzkt.io/',
+                    api: 'https://api.hangzhounet.tzkt.io/v1/',
                 }
             },
             taquitoMin: {
                 lookBy: 'taquito',
-                url: '//meta-l.cdn.bubble.io/f1687506401200x140275660008050600/taquito.min.js',
+                url: '//dd7tel2830j4w.cloudfront.net/f1638978808122x257136835123522140/taquito.min.js',
                 responseType: 'script'
             },
             taquitoBeaconWallet: {
                 lookBy: 'taquitoBeaconWallet',
-                url: '//meta-l.cdn.bubble.io/f1687506430948x932559954189046400/taquito-beacon-wallet.umd.js',
+                url: '//dd7tel2830j4w.cloudfront.net/f1638979044236x672701842478773100/taquito-beacon-wallet.umd.js',
+                responseType: 'script'
+            },
+            walletbeaconMin: {
+                lookBy: 'beacon',
+                url: '//dd7tel2830j4w.cloudfront.net/f1638978891106x951279138406191400/walletbeacon.min.js',
                 responseType: 'script'
             }
         },
         justThings: {
             rpcUrl: 'rpcUrl',
             https: 'https://'
-        }
+        },
+        genericMultisigFile: `parameter (or (unit %default)
+              (pair %main
+                 (pair :payload
+                    (nat %counter) # counter, used to prevent replay attacks
+                    (or :action    # payload to sign, represents the requested action
+                       (lambda %operation unit (list operation))
+                       (pair %change_keys          # change the keys controlling the multisig
+                          (nat %threshold)         # new threshold
+                          (list %keys key))))     # new list of keys
+                 (list %sigs (option signature))));    # signatures
+
+storage (pair (nat %stored_counter) (pair (nat %threshold) (list %keys key))) ;
+
+code
+  {
+    UNPAIR ;
+    IF_LEFT
+      { # Default entry point: do nothing
+        # This entry point can be used to send tokens to this contract
+        DROP ; NIL operation ; PAIR }
+      { # Main entry point
+        # Assert no token was sent:
+        # to send tokens, the default entry point should be used
+        PUSH mutez 0 ; AMOUNT ; ASSERT_CMPEQ ;
+        SWAP ; DUP ; DIP { SWAP } ;
+        DIP
+          {
+            UNPAIR ;
+            # pair the payload with the current contract address, to ensure signatures
+            # can't be replayed accross different contracts if a key is reused.
+            DUP ; SELF ; ADDRESS ; CHAIN_ID ; PAIR ; PAIR ;
+            PACK ; # form the binary payload that we expect to be signed
+            DIP { UNPAIR @counter ; DIP { SWAP } } ; SWAP
+          } ;
+
+        # Check that the counters match
+        UNPAIR @stored_counter; DIP { SWAP };
+        ASSERT_CMPEQ ;
+
+        # Compute the number of valid signatures
+        DIP { SWAP } ; UNPAIR @threshold @keys;
+        DIP
+          {
+            # Running count of valid signatures
+            PUSH @valid nat 0; SWAP ;
+            ITER
+              {
+                DIP { SWAP } ; SWAP ;
+                IF_CONS
+                  {
+                    IF_SOME
+                      { SWAP ;
+                        DIP
+                          {
+                            SWAP ; DIIP { DUUP } ;
+                            # Checks signatures, fails if invalid
+                            { DUUUP; DIP {CHECK_SIGNATURE}; SWAP; IF {DROP} {FAILWITH} };
+                            PUSH nat 1 ; ADD @valid } }
+                      { SWAP ; DROP }
+                  }
+                  {
+                    # There were fewer signatures in the list
+                    # than keys. Not all signatures must be present, but
+                    # they should be marked as absent using the option type.
+                    FAIL
+                  } ;
+                SWAP
+              }
+          } ;
+        # Assert that the threshold is less than or equal to the
+        # number of valid signatures.
+        ASSERT_CMPLE ;
+        # Assert no unchecked signature remains
+        IF_CONS {FAIL} {} ;
+        DROP ;
+
+        # Increment counter and place in storage
+        DIP { UNPAIR ; PUSH nat 1 ; ADD @new_counter ; PAIR} ;
+
+        # We have now handled the signature verification part,
+        # produce the operation requested by the signers.
+        IF_LEFT
+          { # Get operation
+            UNIT ; EXEC
+          }
+          {
+            # Change set of signatures
+            DIP { CAR } ; SWAP ; PAIR ; NIL operation
+          };
+        PAIR }
+  }`
     };
-    
     instance.data.constants = constants;
 
 
@@ -270,11 +365,17 @@ function(instance, context) {
         $.customLoadFile(constants.urls.taquitoMin.url, constants.urls.taquitoMin.responseType, () => {
         });
     }
-    
+    if (!window[constants.urls.walletbeaconMin.lookBy]) {
 
-    if (!window[constants.urls.taquitoBeaconWallet.lookBy]) {
+        $.customLoadFile(constants.urls.walletbeaconMin.url, constants.urls.walletbeaconMin.responseType, () => {
 
-        $.customLoadFile(constants.urls.taquitoBeaconWallet.url, constants.urls.taquitoBeaconWallet.responseType, () => {
+            if (!window.beaconSdk) window.beaconSdk = window.beacon;
+
+            if (!window[constants.urls.taquitoBeaconWallet.lookBy]) {
+
+                $.customLoadFile(constants.urls.taquitoBeaconWallet.url, constants.urls.taquitoBeaconWallet.responseType, () => {
+                });
+            }
         });
     }
 

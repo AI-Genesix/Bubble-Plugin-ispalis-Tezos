@@ -3,7 +3,7 @@ function(instance, properties) {
     let height = properties.bubble.height();
     let width = properties.bubble.width();
 
-    let image = '//dd7tel2830j4w.cloudfront.net/f1620946608373x523940187956281700/beacon_logo.svg';
+    let image = '//meta-l.cdn.bubble.io/f1687726066188x999913872204210700/ispalis.svg';
 
     if (height > width) {
         height = width

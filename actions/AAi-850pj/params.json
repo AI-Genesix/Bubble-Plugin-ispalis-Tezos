@@ -1,0 +1,14 @@
+{
+    "category": "plugins",
+    "display": "Connect to wallet",
+    "return_value": {
+        "AAj": {
+            "caption": "walletAdress",
+            "name": "walletadress",
+            "rank": 0,
+            "value": "text"
+        }
+    },
+    "type": "server_side",
+    "use_packages": true
+}
