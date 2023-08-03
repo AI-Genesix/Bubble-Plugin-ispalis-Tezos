@@ -11,14 +11,16 @@ function(instance, properties, context) {
         let {TezosToolkit} = window.taquito;
         let {BeaconWallet} = window.taquitoBeaconWallet;
 
-        let {appName, appIcon, walletNetwork} = properties;
+        let {appName, appIcon, walletNetwork, walletNetworkDynamic} = properties;
         let walletNetwork_;
 		
-        const Tezos = new TezosToolkit('https://testnet-tezos.giganode.io');
+        instance.data.rpcUrl = 'https://testnet-tezos.giganode.io';
+        instance.data.Tezos = new TezosToolkit('https://testnet-tezos.giganode.io');
         const options = { name: appName };
         const wallet = new BeaconWallet(options);
+        instance.data.wallet = wallet;
 
-        wallet.requestPermissions({
+        instance.data.wallet.requestPermissions({
             network: {
                 type: walletNetwork,
             },
@@ -30,7 +32,7 @@ function(instance, properties, context) {
                 instance.data.userAddress = userAddress;
                 instance.publishState(constants.states.userAddress.id, userAddress);
 
-                instance.data.Tezos.setWalletProvider(wallet)
+                instance.data.Tezos.setWalletProvider(instance.data.wallet)
 
             }).catch(e => {
 

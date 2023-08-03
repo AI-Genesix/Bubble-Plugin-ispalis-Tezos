@@ -1,40 +1,19 @@
 {
     "caption": "Mint",
     "fields": {
-        "AAr": {
-            "caption": "Token Name",
+        "AAy": {
+            "caption": "Address",
             "editor": "DynamicValue",
-            "name": "token_name",
+            "name": "address",
             "rank": 0,
             "value": "text"
         },
-        "AAs": {
-            "caption": "Token Symbol",
+        "AAz": {
+            "caption": "Amount",
             "editor": "DynamicValue",
-            "name": "token_symbol",
+            "name": "amount",
             "rank": 1,
-            "value": "text"
-        },
-        "AAt": {
-            "caption": "Token Description",
-            "editor": "DynamicValue",
-            "long_text": true,
-            "name": "token_description",
-            "rank": 2,
-            "value": "text"
-        },
-        "AAu": {
-            "caption": "Token Image",
-            "editor": "Image",
-            "name": "token_image",
-            "rank": 3
-        },
-        "AAv": {
-            "caption": "Minter Adress",
-            "editor": "DynamicValue",
-            "name": "minter_adress",
-            "rank": 4,
-            "value": "text"
+            "value": "number"
         }
     }
 }
