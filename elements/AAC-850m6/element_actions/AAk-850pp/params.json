@@ -14,6 +14,14 @@
             "name": "amount",
             "rank": 1,
             "value": "number"
+        },
+        "AAy": {
+            "caption": "Wallet Network",
+            "default_val": "mainnnet",
+            "editor": "Dropdown",
+            "name": "walletNetwork",
+            "options": "mainnet,ghostnet",
+            "rank": 2
         }
     }
 }

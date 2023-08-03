@@ -1,6 +1,4 @@
-function(instance, properties, context) {
-
-    const mint = async (
+const mint = async (
     newTokenDefinition: TZIP21TokenMetadata & { quantity: number }
   ) => {
     try {
@@ -18,7 +16,6 @@ function(instance, properties, context) {
           "pinata_secret_api_key",
           `${process.env.REACT_APP_PINATA_API_SECRET}`
         );
-
         const resFile = await fetch(
           "https://api.pinata.cloud/pinning/pinFileToIPFS",
           {
@@ -70,4 +67,3 @@ function(instance, properties, context) {
       });
     }
   };
-}

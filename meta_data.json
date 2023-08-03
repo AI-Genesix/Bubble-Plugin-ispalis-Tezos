@@ -3,6 +3,7 @@
         "0": "ecommerce"
     },
     "description": "Plugin réservé à ispalis - intégration blockchain tezos pour opérations de minting et d'achat / revente",
+    "image": "",
     "license": "private",
     "name": "ispalis Tezos",
     "sa_node_version": 14
